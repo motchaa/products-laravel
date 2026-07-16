@@ -6,6 +6,6 @@
     <h1>Categorias</h1>
 
     @foreach ($categorias as $categoria)
-        <li>{{ $categoria->nome }} | {{ $categoria->descricao }} | <a href="">Editar</a> | <a href="">Excluir</a></li>
+        <li>{{ $categoria->nome }} | {{ $categoria->descricao }} | <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">Editar</a> | <a href="">Excluir</a></li>
     @endforeach
 @endsection

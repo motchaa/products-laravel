@@ -39,19 +39,23 @@ class CategoryController extends Controller
         return redirect()->back()->with('message','Error creating category');
     }
 
-    public function show(string $id)
+    public function edit(Category $categoria)
     {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
+        return view('categoria_edit', ['categoria' => $categoria]);
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $updated = $this->categoria->where('id', $id)->update([
+            'nome' => $request->input('nome'),
+            'descricao' => $request->input('descricao')
+        ]);
+
+        if ($updated) {
+            return redirect()->back()->with('message','Successfully updated');
+        }
+
+        return redirect()->back()->with('message','Error updating category');
     }
 
     public function destroy(string $id)
