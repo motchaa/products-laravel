@@ -45,9 +45,9 @@ class ProductController extends Controller
         return redirect()->back()->with('message','Error creating product');
     }
 
-    public function show(string $id)
+    public function show(Product $produto)
     {
-        //
+        return view('produto_show', ['produto' => $produto]);
     }
     
     public function edit(string $id)
