@@ -13,7 +13,7 @@
     <input type="text" name="nome" placeholder="Nome Produto">
     <input type="text" name="descricao" placeholder="Descrição do Produto">
     <input type="text" name="codigo" placeholder="Código">
-    <input type="number" name="valor" placeholder="Valor">
+    <input type="number" name="valor" step="0.01" placeholder="Valor">
     <input type="number" name="quantidade" placeholder="Quantidade">
     
     <select name="categoria_id" id="categoria_id" required>

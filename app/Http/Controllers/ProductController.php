@@ -50,14 +50,28 @@ class ProductController extends Controller
         return view('produto_show', ['produto' => $produto]);
     }
     
-    public function edit(string $id)
+    public function edit(Product $produto)
     {
-        //
+        $categorias = Category::select('id', 'nome')->orderBy('nome')->get();
+        return view('produto_edit', ['produto' => $produto], compact('categorias')); 
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $updated = $this->produto->where('id', $id)->update([
+            'nome' => $request->input('nome'),
+            'descricao' => $request->input('descricao'),
+            'valor' => $request->input('valor'),
+            'quantidade' => $request->input('quantidade'),
+            'codigo' => $request->input('codigo'),
+            'categoria_id' => $request->input('categoria_id'),
+        ]);
+
+        if($updated) {
+            return redirect()->back()->with('message','Successfully updated');
+        }
+
+        return redirect()->back()->with('message', 'Error updating product');
     }
 
     public function destroy(string $id)

@@ -6,7 +6,7 @@
     <h1>Produtos</h1>
 
     @foreach ($produtos as $produto)
-        <li>{{ $produto->nome }} | R$ {{ $produto->valor }} | <a href="">Editar</a> | <a href="">Excluir</a> | <a href=" {{ route('produto.show', ['produto' => $produto->id]) }}">Show</a>
+        <li>{{ $produto->nome }} | R$ {{ $produto->valor }} | <a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a> | <a href="">Excluir</a> | <a href=" {{ route('produto.show', ['produto' => $produto->id]) }}">Show</a>
         </li>
     @endforeach
 @endsection
