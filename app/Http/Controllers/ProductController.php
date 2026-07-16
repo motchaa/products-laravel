@@ -12,7 +12,7 @@ class ProductController extends Controller
 
     public function __construct(Product $produto)
     {
-        $this->produto = new Product();
+        $this->produto = $produto;
     }
 
     public function index()
@@ -76,6 +76,9 @@ class ProductController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $produto = Product::findOrFail($id);
+        $produto->delete();
+
+        return redirect()->route('produto.index')->with('message', 'Product deleted successfully');
     }
 }

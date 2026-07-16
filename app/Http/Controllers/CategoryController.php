@@ -60,6 +60,14 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $categoria = Category::findOrFail($id);
+
+        if ($categoria->products()->exists()) {
+            return redirect()->back()->with('message', 'Não é possível excluir esta categoria porque existem produtos vinculados a ela.');
+        }
+        
+        $categoria->delete();
+
+        return redirect()->back()->with('message', 'Categoria excluída com sucesso!');
     }
 }
