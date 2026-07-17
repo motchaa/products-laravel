@@ -6,7 +6,6 @@
     <h1>Categorias</h1>
 
     <form action="{{ route('categoria.index') }}" method="GET" style="margin-bottom: 20px;">
-        <!-- O atributo list="descricoes" conecta o input ao datalist -->
         <input 
             type="text" 
             name="search" 
@@ -17,7 +16,6 @@
             autocomplete="off"
         >
         
-        <!-- O navegador cria o dropdown de sugestões sozinho com base nisso -->
         <datalist id="descricoes">
             @foreach($sugestoes as $sugestao)
                 <option value="{{ $sugestao }}">

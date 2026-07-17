@@ -7,4 +7,5 @@
     <p><strong>Descrição:</strong> {{ $produto->descricao }}</p>
     <p><strong>Quantidade:</strong> {{ $produto->quantidade }}</p>
     <p><strong>Categoria:</strong> {{ $produto->categoria_id}}</p>
+    <p><strong>Status:</strong> {{ $produto->ativo ? 'ativo' : 'inativo' }}</p>
 @endsection

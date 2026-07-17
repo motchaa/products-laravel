@@ -15,10 +15,39 @@ class ProductController extends Controller
         $this->produto = $produto;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = $this->produto->all();
-        return view('produtos', ['produtos' => $produtos]);
+        $search = $request->query('search');
+        $categoriaId = $request->query('categoria_id');
+        $status = $request->query('status');
+
+        if ($status === '0') {
+            $query = Product::withTrashed();
+        } else {
+            $query = Product::query();
+        }
+        
+        // Filtro 1: Busca por descrição 
+        $query->when($search, function ($q) use ($search) {
+            return $q->where('descricao', 'like', '%' . $search . '%');
+        });
+
+        // Filtro 2: Categoria (compara o ID estrangeiro)
+        $query->when($categoriaId, function ($q) use ($categoriaId) {
+            return $q->where('categoria_id', $categoriaId);
+        });
+
+        // Filtro 3: Status Ativo (compara com 1 ou 0)
+        $query->when(isset($status) && $status !== '', function ($q) use ($status) {
+            return $q->where('ativo', $status);
+        });
+
+        $produtos = $query->orderBy('nome')->get();
+        $categorias = Category::orderBy('nome')->get();
+
+        $sugestoes = Product::withTrashed()->pluck('descricao')->unique()->filter();
+
+        return view('produtos', compact('produtos', 'categorias', 'search', 'categoriaId', 'status', 'sugestoes'));
     }
 
     public function create()

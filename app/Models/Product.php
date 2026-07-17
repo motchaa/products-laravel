@@ -27,4 +27,12 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'categoria_id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($produto) {
+            $produto->ativo = 0;
+            $produto->save();
+        });
+    }
 }
