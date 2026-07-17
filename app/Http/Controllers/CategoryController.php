@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class CategoryController extends Controller
         return view('categoria_create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         $created = $this->categoria->create([
             'nome' => $request->input('nome'),
@@ -55,7 +56,7 @@ class CategoryController extends Controller
         return view('categoria_edit', ['categoria' => $categoria]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(StoreCategoryRequest $request, string $id)
     {
         $updated = $this->categoria->where('id', $id)->update([
             'nome' => $request->input('nome'),

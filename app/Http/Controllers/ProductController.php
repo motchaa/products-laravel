@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class ProductController extends Controller
         return view('produto_create', compact('categorias'));
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $created = $this->produto->create([
             'nome' => $request->input('nome'),
@@ -85,7 +86,7 @@ class ProductController extends Controller
         return view('produto_edit', ['produto' => $produto], compact('categorias')); 
     }
 
-    public function update(Request $request, string $id)
+    public function update(StoreProductRequest $request, string $id)
     {
         $updated = $this->produto->where('id', $id)->update([
             'nome' => $request->input('nome'),
