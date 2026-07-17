@@ -5,6 +5,34 @@
 
     <h1>Categorias</h1>
 
+    <form action="{{ route('categoria.index') }}" method="GET" style="margin-bottom: 20px;">
+        <!-- O atributo list="descricoes" conecta o input ao datalist -->
+        <input 
+            type="text" 
+            name="search" 
+            list="descricoes"
+            placeholder="Buscar por descrição..." 
+            value="{{ $search ?? '' }}" 
+            style="padding: 5px; width: 250px;"
+            autocomplete="off"
+        >
+        
+        <!-- O navegador cria o dropdown de sugestões sozinho com base nisso -->
+        <datalist id="descricoes">
+            @foreach($sugestoes as $sugestao)
+                <option value="{{ $sugestao }}">
+            @endforeach
+        </datalist>
+
+        <button type="submit" style="padding: 5px 10px;">Buscar</button>
+
+        @if($search)
+            <a href="{{ route('categoria.index') }}" style="margin-left: 10px; color: gray; text-decoration: underline;">
+                Limpar Busca
+            </a>
+        @endif
+    </form>
+
     @foreach ($categorias as $categoria)
         <li>
             {{ $categoria->nome }} | {{ $categoria->descricao }} | 

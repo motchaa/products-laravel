@@ -15,10 +15,21 @@ class CategoryController extends Controller
         $this->categoria = $categoria;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = $this->categoria->all();
-        return view('categorias', ['categorias' => $categorias]);
+        $search = $request->query('search');
+        
+        $query = Category::query();
+
+        if($search) {
+            $query->where('descricao', 'like', '%'. $search .'%');
+        }
+
+        $categorias = $query->orderBy('nome')->get();
+
+        $sugestoes = Category::pluck('descricao')->unique()->filter();
+
+        return view('categorias', compact('categorias', 'search', 'sugestoes'));
     }
     public function create()
     {
