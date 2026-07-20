@@ -7,12 +7,11 @@
     <title>Products Laravel</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="flex flex-col min-h-screen">
-
+<body class="flex flex-col min-h-screen bg-gray-50">
     <header class="bg-emerald-700 text-white w-full h-[7rem] flex items-center justify-between px-[3rem]">
         <img class="w-[300px] h-[100px] mt-[-1rem]" src="{{ asset('logo.svg') }}" alt="Logo">
 
-        <nav class="flex flex-row gap-x-6">
+        <nav class="flex flex-row gap-x-6 ml-[-8rem]">
             <a href="{{ route('produto.index') }}" class="hover:text-emerald-200 transition-colors duration-150">Produtos</a>
             <a href="{{ route('categoria.index') }}" class="hover:text-emerald-200 transition-colors duration-150">Categorias</a>
         </nav>
@@ -26,7 +25,12 @@
     <div class="flex-1">
         @yield('content')
     </div>
-    </div>
+
+    @if(session()->has('message'))
+        <script>
+            alert("{{ session()->get('message') }}");
+        </script>
+    @endif
 
     <footer class="w-full bg-emerald-800 text-white mt-10">
         <div class="max-w-6xl mx-auto px-8 py-10 flex flex-col md:flex-row justify-between items-start gap-8">

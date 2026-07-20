@@ -3,13 +3,8 @@
 @section('content')
 
     <div class="w-full min-h-screen bg-gray-50 text-black flex flex-col items-center pt-20 pb-20 px-[4.5rem]">
-        @if(session()->has('message'))
-            <div style="color: green; margin-bottom: 15px;">
-                {{ session()->get('message') }}
-            </div>
-        @endif
 
-        <form class="bg-white border border-gray-200/80 shadow-xs p-3 rounded-xl  flex flex-row justify-between" action="{{ route('categoria.index') }}" method="GET" style="margin-bottom: 20px;">
+        <form class="bg-white border border-gray-200/80 shadow-xs p-3 rounded-xl flex flex-row justify-between" action="{{ route('categoria.index') }}" method="GET" style="margin-bottom: 20px;">
             <input
                 type="text"
                 name="search"

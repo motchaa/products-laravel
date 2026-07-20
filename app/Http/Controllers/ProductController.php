@@ -69,7 +69,7 @@ class ProductController extends Controller
         ]);
 
         if ($created) {
-            return redirect()->back()->with('message','Successfully created');
+            return redirect()->route('produto.index')->with('message','Successfully created');
         }
 
         return redirect()->back()->with('message','Error creating product');
@@ -98,7 +98,7 @@ class ProductController extends Controller
         ]);
 
         if($updated) {
-            return redirect()->back()->with('message','Successfully updated');
+            return redirect()->route('produto.index')->with('message','Successfully updated');
         }
 
         return redirect()->back()->with('message', 'Error updating product');

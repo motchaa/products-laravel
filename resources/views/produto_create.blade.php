@@ -2,9 +2,6 @@
 
 @section('content')
 
-@if(session()->has('message'))
-    {{ session()->get('message') }}
-@endif
 
 
 <div class="w-full flex bg-gray-50 justify-center py-30 h-[60rem]">

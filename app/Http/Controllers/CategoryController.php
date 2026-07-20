@@ -45,7 +45,7 @@ class CategoryController extends Controller
         ]);
 
         if ($created) {
-            return redirect()->back()->with('message','Successfully created');
+            return redirect()->route('categoria.index')->with('message','Successfully created');
         }
 
         return redirect()->back()->with('message','Error creating category');
@@ -64,7 +64,7 @@ class CategoryController extends Controller
         ]);
 
         if ($updated) {
-            return redirect()->back()->with('message','Successfully updated');
+            return redirect()->route('categoria.index')->with('message','Successfully updated');
         }
 
         return redirect()->back()->with('message','Error updating category');

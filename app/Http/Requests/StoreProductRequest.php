@@ -21,13 +21,19 @@ class StoreProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $productId = $this->route('id') ?? $this->route('produto');
+        $product = $this->route('produto') ?? $this->route('id');
+    
+        $productId = is_object($product) ? $product->id : $product;
         
         return [
             'nome' => ['required', 'string'],
             'descricao' => ['required', 'string'],
             'categoria_id' => ['required', 'exists:categorias,id'],
-            'codigo' => ['required', 'string', 'unique:products,codigo,' . $productId],
+            'codigo' => [
+                'required',
+                'string',
+                $productId ? "unique:produtos,codigo,{$productId}" : "unique:produtos,codigo"
+            ],
             'valor' => ['required', 'numeric', 'gt:0'],
             'quantidade' => ['required', 'integer', 'min:0'],
         ];
